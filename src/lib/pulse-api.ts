@@ -3,9 +3,8 @@ import type { PulseState } from "./pulse-store";
 const configuredApiUrl = import.meta.env.VITE_API_BASE_URL?.trim().replace(/\/$/, "");
 const configuredPersistenceMode = import.meta.env.VITE_PERSISTENCE_MODE?.trim().toLowerCase();
 
-export const pulsePersistenceMode = configuredPersistenceMode === "browser"
-  ? "browser"
-  : configuredPersistenceMode === "api" || configuredApiUrl || import.meta.env.PROD
+export const pulsePersistenceMode =
+  configuredPersistenceMode === "api" || (configuredPersistenceMode !== "browser" && configuredApiUrl)
     ? "api"
     : "browser";
 
